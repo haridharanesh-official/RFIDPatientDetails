@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Patient Portal — Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+</head><body>
+  <div class="navbar">
+    <div class="brand">Patient Portal</div>
+    <div class="nav-actions">
+      <a href="add_patient.html" class="btn">➕ Add Patient</a>
+      <a href="view_patients.html" class="btn">📄 View Patients</a>
+      <button id="logoutBtn" class="btn danger">Logout</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <h2>Welcome, Doctor</h2>
+    <p>Use the buttons above to add or view patient records. Data persists in your browser (localStorage).</p>
+    <section class="cards">
+      <div class="tile">
+        <h3>Patients</h3>
+        <p id="countPatients">—</p>
+      </div>
+      <div class="tile">
+        <h3>Quick Actions</h3>
+        <p><a href="add_patient.html" class="link">Add a new patient</a></p>
+      </div>
+    </section>
+  </main>
+
+<script src="script.js"></script>
+<script>
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  logout();
+});
+document.addEventListener('DOMContentLoaded', async () => {
+  const list = await loadPatients();
+  document.getElementById('countPatients').textContent = list.length + ' total';
+});
+</script>
+</body></html>

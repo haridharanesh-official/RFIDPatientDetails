@@ -1,0 +1,22 @@
+/* Simple, clean styling */
+:root{--brand:#2563eb;--muted:#6b7280;--danger:#ef4444}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Arial,sans-serif;background:#f3f6fb;margin:0;color:#0f172a}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:var(--brand);color:#fff}
+.navbar .brand{font-weight:700}
+.nav-actions a.btn,.nav-actions button.btn{margin-left:8px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;text-decoration:none;border:0;cursor:pointer}
+.nav-actions button.danger{background:var(--danger)}
+.container{max-width:980px;margin:28px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,0.06)}
+.card{max-width:420px;margin:80px auto;padding:28px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.08);text-align:center}
+input,select,button{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef8;margin:8px 0}
+button{background:var(--brand);color:#fff;border:0;cursor:pointer}
+button:hover{opacity:0.95}
+.muted{color:var(--muted);font-size:13px}
+.error{color:var(--danger);margin-top:8px}
+.success{color:green;margin-top:8px}
+.table-wrap{overflow:auto}
+table.patients{width:100%;border-collapse:collapse}
+table.patients th,table.patients td{padding:10px;border-bottom:1px solid #eef6ff;text-align:center}
+.detail th{text-align:left;padding:10px;background:#f8fafc}
+.tile{padding:20px;border-radius:10px;background:linear-gradient(180deg,#ffffff,#f8fbff);box-shadow:0 6px 16px rgba(2,6,23,0.04);margin:10px}
+.cards{display:flex;gap:12px;flex-wrap:wrap}

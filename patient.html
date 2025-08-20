@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Patient Details</title>
+<link rel="stylesheet" href="style.css" />
+</head><body>
+  <div class="navbar">
+    <div class="brand">Patient Portal</div>
+    <div class="nav-actions">
+      <a href="dashboard.html" class="btn">🏠 Dashboard</a>
+      <a href="view_patients.html" class="btn">📄 View Patients</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <h2>Patient Details</h2>
+    <div id="details"></div>
+  </main>
+
+<script src="script.js"></script>
+<script>
+async function showPatientFromQuery(){
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id');
+  const list = await loadPatients();
+  const p = list.find(x=> x.patientId === id);
+  const el = document.getElementById('details');
+  if(!p){ el.innerHTML = '<p class="error">Patient not found</p>'; return; }
+  el.innerHTML = `
+    <table class="detail">
+      <tr><th>Patient ID</th><td>${escapeHtml(p.patientId)}</td></tr>
+      <tr><th>Name</th><td>${escapeHtml(p.name)}</td></tr>
+      <tr><th>Age</th><td>${p.age}</td></tr>
+      <tr><th>Gender</th><td>${p.gender}</td></tr>
+      <tr><th>Allergies</th><td>${escapeHtml(p.allergies||'-')}</td></tr>
+      <tr><th>Medication</th><td>${escapeHtml(p.medication||'-')}</td></tr>
+      <tr><th>Emergency Contact</th><td>${escapeHtml(p.emergency)}</td></tr>
+    </table>
+  `;
+}
+document.addEventListener('DOMContentLoaded', showPatientFromQuery);
+</script>
+</body></html>

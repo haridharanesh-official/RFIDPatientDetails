@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>View Patients</title>
+<link rel="stylesheet" href="style.css" />
+</head><body>
+  <div class="navbar">
+    <div class="brand">Patient Portal</div>
+    <div class="nav-actions">
+      <a href="dashboard.html" class="btn">🏠 Dashboard</a>
+      <a href="add_patient.html" class="btn">➕ Add Patient</a>
+      <button onclick="logout()" class="btn danger">Logout</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <h2>Patients List</h2>
+    <div class="table-wrap">
+      <table id="patientsTable" class="patients">
+        <thead>
+          <tr>
+            <th>Patient ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Allergies</th><th>Medication</th><th>Emergency Contact</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p id="empty" class="muted"></p>
+  </main>
+
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const list = await loadPatients();
+  const tbody = document.querySelector('#patientsTable tbody');
+  tbody.innerHTML = '';
+  if (!list.length) {
+    document.getElementById('empty').textContent = 'No patients found. Add one from Add Patient.';
+  } else {
+    document.getElementById('empty').textContent = '';
+  }
+  list.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><a href="patient.html?id=${encodeURIComponent(p.patientId)}" target="_blank">${p.patientId}</a></td>
+      <td>${escapeHtml(p.name)}</td>
+      <td>${p.age}</td>
+      <td>${p.gender}</td>
+      <td>${escapeHtml(p.allergies||'-')}</td>
+      <td>${escapeHtml(p.medication||'-')}</td>
+      <td>${escapeHtml(p.emergency)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+});
+</script>
+</body></html>

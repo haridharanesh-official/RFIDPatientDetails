@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Add Patient</title>
+<link rel="stylesheet" href="style.css" />
+</head><body>
+  <div class="navbar">
+    <div class="brand">Patient Portal</div>
+    <div class="nav-actions">
+      <a href="dashboard.html" class="btn">🏠 Dashboard</a>
+      <a href="view_patients.html" class="btn">📄 View Patients</a>
+      <button onclick="logout()" class="btn danger">Logout</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <h2>Add Patient</h2>
+    <form id="addPatientForm" class="form">
+      <label>Patient ID</label>
+      <input id="patientId" placeholder="e.g. P-1003" required />
+      <label>Full Name</label>
+      <input id="name" placeholder="Name" required />
+      <label>Age</label>
+      <input id="age" type="number" min="0" placeholder="Age" required />
+      <label>Gender</label>
+      <select id="gender" required>
+        <option value="">Select</option><option>Male</option><option>Female</option><option>Other</option>
+      </select>
+      <label>Allergies</label>
+      <input id="allergies" placeholder="Allergies (comma separated)" />
+      <label>Medication</label>
+      <input id="medication" placeholder="Medication details" />
+      <label>Emergency Contact</label>
+      <input id="emergency" placeholder="+91 9XXXXXXXXX" required />
+      <button type="submit">Save Patient</button>
+    </form>
+    <p id="status" class="success"></p>
+  </main>
+
+<script src="script.js"></script>
+<script>
+document.getElementById('addPatientForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const p = {
+    patientId: document.getElementById('patientId').value.trim(),
+    name: document.getElementById('name').value.trim(),
+    age: Number(document.getElementById('age').value),
+    gender: document.getElementById('gender').value,
+    allergies: document.getElementById('allergies').value.trim(),
+    medication: document.getElementById('medication').value.trim(),
+    emergency: document.getElementById('emergency').value.trim()
+  };
+  try {
+    await addPatient(p);
+    document.getElementById('status').textContent = 'Patient saved locally.';
+    setTimeout(()=>{ window.location.href='view_patients.html'; }, 700);
+  } catch(err) {
+    document.getElementById('status').textContent = 'Error: ' + err.message;
+  }
+});
+</script>
+</body></html>

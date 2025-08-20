@@ -1,0 +1,20 @@
+[
+  {
+    "patientId": "P-1001",
+    "name": "John Doe",
+    "age": 45,
+    "gender": "Male",
+    "allergies": "Penicillin",
+    "medication": "Aspirin",
+    "emergency": "+91 9876543210"
+  },
+  {
+    "patientId": "P-1002",
+    "name": "Alice Smith",
+    "age": 32,
+    "gender": "Female",
+    "allergies": "None",
+    "medication": "Metformin",
+    "emergency": "+91 9123456780"
+  }
+]
